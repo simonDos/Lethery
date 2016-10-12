@@ -1,0 +1,95 @@
+<head>
+  <title>Lethery</title>
+</head>
+
+<body class="">
+  <div class="infobox">
+    <h3>Welcome to</h3>
+    <h1>Lethery</h1>
+    <h2>The reliable Ethereum Lottery</h2>
+  </div>
+
+  {{> mainboard}}
+
+</body>
+
+
+<template name="mainboard">
+  <div class="infobox" style="display: {{noMist}}">
+    <h3 class="bigInfo error">Please use the Mist Browser!</h3>
+    <p class="smallInfo">
+      You will not be able to interact with the smart contract through a regular browser!
+    </p>
+  </div>
+  <div class="">
+    <div class="infobox small">
+      <h3>Current Jackpot</h3>
+      <p class="bigInfo">{{TemplateVar.get 'currentJackpot'}}</p>
+    </div>
+    <div class="infobox small">
+      <h3>Current Round</h3>
+      <p id="curRound" class="bigInfo">{{TemplateVar.get 'currentRound'}}</p>
+    </div>
+    <div class="infobox small">
+      <h3>Current Block</h3>
+      <p class="bigInfo">{{currentBlock}}</p>
+    </div>
+    <div class="infobox small">
+      <h3>Next Decision</h3>
+      <p class="bigInfo">{{TemplateVar.get 'nextDecision'}}</p>
+    </div>
+  </div>
+  <div class="infobox">
+    <p class="smallInfo">The game is very simple: </p>
+    <p class="smallInfo">You send ether to the contract in order to participate.</p>
+    <p class="smallInfo">The higher your contribution the more likely you are to win the Jackpot!</p>
+    <p class="smallInfo">The algorythm will pick a random number from 0 to 'jackpot'</p>
+    <p class="smallInfo">and if it falls in the interval of your contribution, you win!</p>
+    <p class="smallInfo">Minimum is 1 ether and excess will be refunded.</p>
+  </div>
+  <div class="">
+    <div class="infobox middle color2">
+      <h3>select address</h3>
+      <select id="addressSelect" class="addressSelect" name="address">
+        <option value="0">None</option>
+      </select>
+    </div>
+    <div class="infobox middle color1">
+      <h3>Amount to commit</h3>
+      <input id="amount" type="number" name="setEther" value="0" min="0">
+    </div>
+  </div>
+  <div class="">
+    <div class="infobox middle color2">
+      <h3>select round</h3>
+      <input class="roundSelect" type="number" name="round" value={{TemplateVar.get 'roundSelected'}} min="0" max={{TemplateVar.get 'roundSelected'}}>
+    </div>
+    <div class="infobox middle color1">
+      <input id="sendEther" class="sendEther" type="submit" name="sendEther" value="Commit">
+    </div>
+  </div>
+  <div class="">
+    <div class="infobox small">
+      <h3>Jackpot</h3>
+      <p class="bigInfo">{{TemplateVar.get 'jackpotOfRound'}}</p>
+    </div>
+    <div class="infobox small">
+      <h3>Winning Number</h3>
+      <p class="bigInfo">{{TemplateVar.get 'numberOfRound'}}</p>
+    </div>
+    <div class="infobox small">
+      <h3>My Balance</h3>
+      <p class="bigInfo">{{TemplateVar.get 'myBalance'}}</p>
+    </div>
+    <div class="infobox small">
+      <input id="drawWinner" class="drawWinner" type="submit" name="drawWinner" value="Draw Winner">
+    </div>
+  </div>
+  <div class="infobox">
+    <h3>Winner</h3>
+    <p class="bigInfo">{{TemplateVar.get 'winnerOfRound'}}</p>
+  </div>
+  <div class="infobox">
+    <input id="redeem5" class="redeem5" type="submit" name="redeem5" value="Redeem 5 Ether">
+  </div>
+</template>
