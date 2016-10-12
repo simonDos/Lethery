@@ -66,9 +66,6 @@ contract Lethery{
     }
 
     function redeem(uint256 round) {
-        if (rounds[round].winner == 0){
-            return;
-        }
         if (msg.sender != rounds[round].winner){
             return;
         }
@@ -77,7 +74,6 @@ contract Lethery{
             return;
         }
         rounds[round].jackpot = 0;
-        rounds[round].contributions[msg.sender] = 0;
     }
 
     function getMyBalance(address a, uint256 round) constant returns(uint){
@@ -93,11 +89,7 @@ contract Lethery{
     }
 
     function getWinnerOfRound(uint256 round)constant returns(address){
-        if(rounds[round].winner != 0){
-            return rounds[round].winner;
-        } else {
-            return 0;
-        }
+        return rounds[round].winner;
     }
 
     function getWinNrOfRound(uint256 round)constant returns(uint256){
