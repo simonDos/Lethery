@@ -65,7 +65,7 @@ contract Lethery{
         return uint(sha3(blockHash+nonce))%(rounds[rn].jackpot);
     }
 
-    function redeem5(uint256 round) {
+    function redeem(uint256 round) {
         if (rounds[round].winner == 0){
             return;
         }
@@ -73,26 +73,11 @@ contract Lethery{
             return;
         }
         //send money and dont forget to multiply with price
-        //in case jackpot is smaller than 5 ether
-        if(rounds[round].jackpot < 5){
-            if(!rounds[round].winner.send(rounds[round].jackpot*price)){
-                return;
-            }
-            rounds[round].jackpot = 0;
-            rounds[round].contributions[msg.sender] = 0;
-        } else {
-            if(!rounds[round].winner.send(5*price)){
-                return;
-            }
-            rounds[round].jackpot -= 5;
-            rounds[round].contributions[msg.sender] -= 5;
+        if(!rounds[round].winner.send(rounds[round].jackpot*price)){
+            return;
         }
-    }
-
-    function getContr(uint round, uint count) constant returns(address a, uint v){
-        a = rounds[round].addresses[count];
-        v = rounds[round].contributions[a];
-        return (a,v);
+        rounds[round].jackpot = 0;
+        rounds[round].contributions[msg.sender] = 0;
     }
 
     function getMyBalance(address a, uint256 round) constant returns(uint){
@@ -119,12 +104,8 @@ contract Lethery{
         return rounds[round].winNr;
     }
 
-    function nextDecision() constant returns(uint) {
-        if(block.number < decisionBlock){
-          return decisionBlock - block.number;
-        } else {
-          return 0;
-        }
+    function getDecisionBlock() constant returns(uint) {
+          return decisionBlock;
     }
 
     function remove(){

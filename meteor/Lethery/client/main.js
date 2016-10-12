@@ -15,7 +15,12 @@ curRound = 0;
 var getNextDecision = function(template) {
   lethery.nextDecision(function(e,r){
     if(!e) {
-      if(r.c[0]==0) r='now'; //if drawing time, change r to 'now'
+      var currentBlock = EthBlocks.latest.number;
+      if(r.c[0] < currentBlock){
+        r = 'now';
+      } else{
+        r -= currentBlock;
+      } 
       TemplateVar.set(template, 'nextDecision',r);
     }
   });
