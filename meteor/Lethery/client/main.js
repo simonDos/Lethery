@@ -138,12 +138,14 @@ Template.mainboard.events({
   },
   'click .drawWinner'(event) {
     console.log("draw Winner");
-    if(addressSelected != 0){
+    if($('#decision').text() != 'now'){
+      alert("The round is not over yet!");
+    } else if(addressSelected == 0) {
+      alert("You need to select an address!");
+    } else {
       lethery.drawWinner({from: addressSelected}, function(e,r){
         if(!e) alert("Winner drawn!");
       });
-    } else {
-      alert("You need to select an address!");
     }
   },
   'click .roundSelect'(event) {
@@ -160,12 +162,15 @@ Template.mainboard.events({
     getMyBalance(template);
   },
   'click .redeem'(event) {
-    if(addressSelected != 0){
-      lethery.redeem5(roundSelected, {from: addressSelected}, function(e,r){
+    if(addressSelected == 0){
+      alert("You need to select an address!");
+    } else if(addressSelected != $('#winner').text()) {
+      alert("You are not the winner :(");
+    } else {
+
+      lethery.redeem(roundSelected, {from: addressSelected}, function(e,r){
         if(!e) console.log("Success!");
       });
-    } else {
-      alert("You need to select an address!");
     }
   }
 });
