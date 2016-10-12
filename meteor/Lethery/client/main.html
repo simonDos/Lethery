@@ -47,6 +47,9 @@
     <p class="smallInfo">and if it falls in the interval of your contribution, you win!</p>
     <p class="smallInfo">Minimum is 1 ether and excess will be refunded.</p>
   </div>
+  <div class="infobox">
+    <input id="drawWinner" class="drawWinner" type="submit" name="drawWinner" value="Draw Winner">
+  </div>
   <div class="">
     <div class="infobox middle color2">
       <h3>select address</h3>
@@ -77,19 +80,16 @@
       <h3>Winning Number</h3>
       <p class="bigInfo">{{TemplateVar.get 'numberOfRound'}}</p>
     </div>
-    <div class="infobox small">
+    <div class="infobox middle">
       <h3>My Balance</h3>
       <p class="bigInfo">{{TemplateVar.get 'myBalance'}}</p>
-    </div>
-    <div class="infobox small">
-      <input id="drawWinner" class="drawWinner" type="submit" name="drawWinner" value="Draw Winner">
     </div>
   </div>
   <div class="infobox">
     <h3>Winner</h3>
-    <p class="bigInfo">{{TemplateVar.get 'winnerOfRound'}}</p>
+    <p class="bigInfo" id="winner">{{TemplateVar.get 'winnerOfRound'}}</p>
   </div>
   <div class="infobox">
-    <input id="redeem5" class="redeem5" type="submit" name="redeem5" value="Redeem 5 Ether">
+    <input id="redeem" class="redeem" type="submit" name="redeem" value="Redeem Winnings" {{isWinner}}>
   </div>
 </template>

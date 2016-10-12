@@ -13,14 +13,14 @@ template = null;
 curRound = 0;
 
 var getNextDecision = function(template) {
-  lethery.nextDecision(function(e,r){
+  lethery.getDecisionBlock(function(e,r){
     if(!e) {
       var currentBlock = EthBlocks.latest.number;
       if(r.c[0] < currentBlock){
         r = 'now';
       } else{
         r -= currentBlock;
-      } 
+      }
       TemplateVar.set(template, 'nextDecision',r);
     }
   });
@@ -159,7 +159,7 @@ Template.mainboard.events({
     addressSelected = event.target.value;
     getMyBalance(template);
   },
-  'click .redeem5'(event) {
+  'click .redeem'(event) {
     if(addressSelected != 0){
       lethery.redeem5(roundSelected, {from: addressSelected}, function(e,r){
         if(!e) console.log("Success!");
