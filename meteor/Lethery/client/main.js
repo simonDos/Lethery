@@ -3,8 +3,6 @@ import { ReactiveVar } from 'meteor/reactive-var';
 
 import './main.html';
 
-//TODO give feed back for longer transactions plus when address is not selected
-
 //web3 and lethery are being initialized in /lib/ethereum/init.js
 roundSelected = null;
 addressSelected = 0;
@@ -88,7 +86,6 @@ Template.mainboard.onCreated(function mainboardOnCreated() {
   EthBlocks.init();
 
   getCurrentRound(template);
-  //TODO update this field when winner was drawn
 
   //check activeAccounts
   getActiveAccounts(template);
@@ -103,10 +100,21 @@ Template.mainboard.onCreated(function mainboardOnCreated() {
     getCurrentJackpot(template);
   }, 1000);
 
-  this.getJackpotOfRoundIntervalId = setInterval(function() {getJackpotOfRound(template);}, 1000);
-  this.getNumberOfRoundIntervalId = setInterval(function() {getNumberOfRound(template);}, 1000);
-  this.getMyBalanceIntervalId = setInterval(function() {getMyBalance(template);}, 1000);
-  this.getWinnerOfRoundIntervalId = setInterval(function() {getWinnerOfRound(template);}, 1000);
+  this.getJackpotOfRoundIntervalId = setInterval(function() {
+    getJackpotOfRound(template);
+  }, 1000);
+
+  this.getNumberOfRoundIntervalId = setInterval(function() {
+    getNumberOfRound(template);
+  }, 1000);
+
+  this.getMyBalanceIntervalId = setInterval(function() {
+    getMyBalance(template);
+  }, 1000);
+
+  this.getWinnerOfRoundIntervalId = setInterval(function() {
+    getWinnerOfRound(template);
+  }, 1000);
 });
 
 Template.mainboard.helpers({
@@ -130,14 +138,13 @@ Template.mainboard.events({
     var value = $('#amount').val();
     if(addressSelected != 0){
       lethery.commit({from: addressSelected, value: web3.toWei(value, 'ether')}, function(e,r){
-        if(!e) alert("Commit successful!");
+        if(!e) alert("Commit successful !\nChanges will be visible after next block is mined");
       });
     } else {
       alert("You need to select an address!");
     }
   },
   'click .drawWinner'(event) {
-    console.log("draw Winner");
     if($('#decision').text() != 'now'){
       alert("The round is not over yet!");
     } else if(addressSelected == 0) {
@@ -145,6 +152,7 @@ Template.mainboard.events({
     } else {
       lethery.drawWinner({from: addressSelected}, function(e,r){
         if(!e) alert("Winner drawn!");
+        getCurrentRound(template);
       });
     }
   },
