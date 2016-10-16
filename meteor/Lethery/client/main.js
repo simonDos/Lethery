@@ -151,7 +151,7 @@ Template.mainboard.events({
       alert("You need to select an address!");
     } else {
       lethery.drawWinner({from: addressSelected}, function(e,r){
-        if(!e) alert("Winner drawn!");
+        if(!e) alert("Winner drawn!\nChanges will be visible after next block is mined");
         getCurrentRound(template);
       });
     }

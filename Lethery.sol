@@ -43,9 +43,6 @@ contract Lethery{
         if (block.number < decisionBlock){
             return;
         }
-        if(rounds[rn].jackpot == 0){
-            return;
-        }
         uint etherCount = 0;
         uint addressCount = 0;
         rounds[rn].winNr = rand();
