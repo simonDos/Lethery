@@ -126,7 +126,8 @@ Template.mainboard.helpers({
   },
   noMist() {
     try{
-      if(mist.version != "") return "none";
+      //TODO smth only mist and metamask will successfully execute
+      return "none";
     } catch(e) {
       return "block";
     }
