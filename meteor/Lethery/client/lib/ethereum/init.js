@@ -1,6 +1,8 @@
 if(typeof web3 === 'undefined')
 	web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
 
-contractAddress = '0x47E88B05ef9434947640b8e1EDB985137CDDA74D';
+
+contractAddressLocal = '0x47E88B05ef9434947640b8e1EDB985137CDDA74D';
+contractAddressRopsten = '0xf627e446db6b2960e2056ababd79f81a5c4a9b52';
 contractABI = '[{"constant":false,"inputs":[],"name":"commit","outputs":[],"payable":true,"type":"function"},{"constant":true,"inputs":[{"name":"round","type":"uint256"}],"name":"getWinnerOfRound","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"round","type":"uint256"}],"name":"getWinNrOfRound","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"getCurrentRoundNr","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"getDecisionBlock","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"remove","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"round","type":"uint256"}],"name":"getJackpotOfRound","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"drawWinner","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"a","type":"address"},{"name":"round","type":"uint256"}],"name":"getMyBalance","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"round","type":"uint256"}],"name":"redeem","outputs":[],"payable":false,"type":"function"},{"inputs":[],"type":"constructor"}]';
-lethery = web3.eth.contract(JSON.parse(contractABI)).at(contractAddress);
+lethery = web3.eth.contract(JSON.parse(contractABI)).at(contractAddressRopsten);
