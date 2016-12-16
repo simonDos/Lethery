@@ -1,3 +1,4 @@
+//if an injected web3 instance (like from metamask) is detected, this line will not apply
 if(typeof web3 === 'undefined')
 	web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
 
