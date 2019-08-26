@@ -66,11 +66,14 @@ contract Lethery{
         if (msg.sender != rounds[round].winner){
             return;
         }
+
+        uint amount = rounds[round].jackpot;
+        rounds[round].jackpot = 0;
+
         //send money and dont forget to multiply with price
-        if(!rounds[round].winner.send(rounds[round].jackpot*price)){
+        if(!rounds[round].winner.send(amount * price)){
             return;
         }
-        rounds[round].jackpot = 0;
     }
 
     function getMyBalance(address a, uint256 round) constant returns(uint){
